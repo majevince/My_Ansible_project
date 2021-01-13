@@ -1,0 +1,19 @@
+---
+- hosts: mgt
+  become: true
+
+  tasks:
+   - name: Installing of the latest packages 
+     yum:
+       name:
+         - git
+         - vim
+         - bash-completion         
+       state: latest 
+
+   - name: this task is to install git username in configs
+     become: false 
+     command: 
+       argv: 
+         - git config --global user.name "Maje Anyah"
+         - git config --global user.email "lptxanyahvincent@yahoo.com"
