@@ -1,0 +1,8 @@
+---
+- hosts: mgt
+  tasks:
+   - name: debug ansible facts
+     debug: 
+       msg: >
+         the default IPV4 address of "{{ansible_fqdn}}"
+         is "{{ansible_all_ipv4_addresses}}"

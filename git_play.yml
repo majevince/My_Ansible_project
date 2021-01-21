@@ -1,19 +1,34 @@
 ---
 - hosts: mgt
   become: true
+  vars_files:
+     - webvars.yml
 
   tasks:
-   - name: Installing of the latest packages 
+   - name: Installing the latest packages 
      yum:
-       name:
-         - git
-         - vim
-         - bash-completion         
-       state: latest 
+       name: "{{ packages}}"
+       state: latest
+
+   - name: create user account 
+     user:
+       name: vince
+       state: present 
+
 
    - name: this task is to install git username in configs
      become: false 
-     command: 
-       argv: 
-         - git config --global user.name "Maje Anyah"
-         - git config --global user.email "lptxanyahvincent@yahoo.com"
+     git_config: 
+            name: user.name
+            scope: global
+            value: "Maje Anyah" 
+         
+   - name: this task will config git email globally 
+     become: false
+     git_config: 
+           name: user.email
+           scope: global
+           value: "lptxanyahvincent@gmail.com"
+   
+   
+
