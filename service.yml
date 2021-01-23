@@ -1,0 +1,8 @@
+---
+- name: start service 
+  hosts: mgt 
+  tasks:
+    - name: start service 
+      service:
+        name: "{{ansible.local.custum.general.service}}"
+        state: "{{ansible.local.custum.general.state}}"

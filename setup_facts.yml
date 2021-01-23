@@ -1,0 +1,18 @@
+---
+- name: Install remote facts
+  hosts: mgt
+  vars:
+    remote_dir: /etc/ansible/facts.d
+    fact_file: custum.fact
+
+  tasks:
+    - name: create the remote directory 
+      file:
+        state: directory
+        recurse: yes 
+        path: "{{remote_dir}}"
+    - name: install the new facts
+      copy:
+        scr: "{{fact_file}}"
+        dest: "{{remote_dir}}"
+        
